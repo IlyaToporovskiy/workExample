@@ -1,13 +1,14 @@
-package hello;
+package hello.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HomeController {
+public class Controller {
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public String index() {
         return "Welcome to the home page!";
     }
+
 }
