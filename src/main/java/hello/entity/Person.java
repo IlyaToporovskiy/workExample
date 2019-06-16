@@ -4,7 +4,7 @@ import org.springframework.ldap.odm.annotations.*;
 
 import javax.naming.Name;
 
-@Entry(objectClasses = {"inetOrgPerson", "organizationalPerson", "person", "top"})
+@Entry(base = "ou=people", objectClasses = {"inetOrgPerson", "organizationalPerson", "person", "top"})
 public class Person {
     @Id
     private Name dn;
@@ -97,3 +97,26 @@ public class Person {
         this.phone = phone;
     }
 }
+
+/*
+@Entry(objectClasses = { "person", "top" }, base="ou=people")
+public class Person {
+    @Id
+    private Name dn;
+
+    @Attribute(name="cn")
+    @DnAttribute(value="cn", index=1)
+    private String fullName;
+
+    // No @Attribute annotation means this will be bound to the LDAP attribute
+    // with the same value
+    private String description;
+
+    @DnAttribute(value="ou", index=0)
+    @Transient
+    private String company;
+
+    @Transient
+    private String someUnmappedField;
+    // ...more attributes below
+}*/

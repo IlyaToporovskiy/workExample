@@ -18,21 +18,21 @@ import org.springframework.web.servlet.ModelAndView;
 //}
 
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class HomeController {
 
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET,value = "/")
     public ModelAndView home()
     {
         return new ModelAndView("index");
     }
 
 
-    @RequestMapping(value = "profile", method = RequestMethod.GET)
-    public ModelAndView interfaces()
-    {
-        return new ModelAndView("profile");
-    }
+//    @RequestMapping(value = "profile", method = RequestMethod.GET)
+//    public ModelAndView interfaces()
+//    {
+//        return new ModelAndView("profile");
+//    }
 }
 

@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
-    @GetMapping("/user")
-    public String index() {
-        return "Welcome to the home page!";
-    }
+//    @GetMapping("/response")
+//    public String index() {
+//
+//        return "Welcome to the home page!";
+//    }
 
 }
