@@ -3,6 +3,7 @@ package hello.entity;
 import org.springframework.ldap.odm.annotations.*;
 
 import javax.naming.Name;
+import java.util.Objects;
 
 @Entry(base = "ou=people", objectClasses = {"inetOrgPerson", "organizationalPerson", "person", "top"})
 public class Person {
@@ -95,6 +96,26 @@ public class Person {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(dn, person.dn) &&
+                Objects.equals(fullName, person.fullName) &&
+                Objects.equals(lastName, person.lastName) &&
+                Objects.equals(uid, person.uid) &&
+                Objects.equals(description, person.description) &&
+                Objects.equals(country, person.country) &&
+                Objects.equals(company, person.company) &&
+                Objects.equals(phone, person.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dn, fullName, lastName, uid, description, country, company, phone);
     }
 }
 

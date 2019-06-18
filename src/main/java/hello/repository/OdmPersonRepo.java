@@ -12,6 +12,7 @@ public class OdmPersonRepo {
     @Autowired
     private LdapTemplate ldapTemplate;
 
+
     public Person create(Person person) {
         ldapTemplate.create(person);
         return person;

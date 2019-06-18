@@ -196,6 +196,7 @@ import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.ldap.support.LdapUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.ldap.query.LdapQueryBuilder.query;
 
@@ -235,6 +236,16 @@ public class PersonRepoImpl implements PersonRepo {
         ldapTemplate.unbind(buildDn(person));
     }
 
+    @Override
+    public void deleteAll(Iterable<? extends Person> iterable) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
+
     public Person findByPrimaryKey(String name, String company, String country) {
         Name dn = buildDn(name, company, country);
         return (Person) ldapTemplate.lookup(dn, getContextMapper());
@@ -248,9 +259,63 @@ public class PersonRepoImpl implements PersonRepo {
         return ldapTemplate.search(query, getContextMapper());
     }
 
-    public List findAll() {
+    @Override
+    public <S extends Person> S save(S s) {
+        return null;
+    }
+
+    @Override
+    public <S extends Person> Iterable<S> saveAll(Iterable<S> iterable) {
+        return null;
+    }
+
+    @Override
+    public Optional<Person> findById(Name name) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean existsById(Name name) {
+        return false;
+    }
+
+    /*public List findAll() {
         EqualsFilter filter = new EqualsFilter("objectclass", "person");
         return ldapTemplate.search(LdapUtils.emptyLdapName(), filter.encode(), getContextMapper());
+    }*/
+    public List<Person> findAll() {
+        return ldapTemplate.search(query()
+                .where("objectclass").is("person"),PERSON_CONTEXT_MAPPER);
+    }
+    private final static ContextMapper<Person> PERSON_CONTEXT_MAPPER = new AbstractContextMapper<Person>() {
+        @Override
+        public Person doMapFromContext(DirContextOperations context) {
+            Person person = new Person();
+
+            LdapName dn = LdapUtils.newLdapName(context.getDn());
+            person.setCountry(LdapUtils.getStringValue(dn, 0));
+            person.setCompany(LdapUtils.getStringValue(dn, 1));
+            person.setFullName(context.getStringAttribute("cn"));
+            person.setLastName(context.getStringAttribute("sn"));
+            person.setDescription(context.getStringAttribute("description"));
+            person.setPhone(context.getStringAttribute("telephoneNumber"));
+
+            return person;
+        }
+    };
+    @Override
+    public Iterable<Person> findAllById(Iterable<Name> iterable) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Name name) {
+
     }
 
     protected ContextMapper getContextMapper() {
@@ -274,6 +339,16 @@ public class PersonRepoImpl implements PersonRepo {
         context.setAttributeValue("cn", person.getFullName());
         context.setAttributeValue("sn", person.getLastName());
         context.setAttributeValue("description", person.getDescription());
+    }
+
+    @Override
+    public Optional<Person> findOne(LdapQuery ldapQuery) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Iterable<Person> findAll(LdapQuery ldapQuery) {
+        return null;
     }
 
     private static class PersonContextMapper extends AbstractContextMapper<Person> {
