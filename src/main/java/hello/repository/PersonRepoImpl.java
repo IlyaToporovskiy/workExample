@@ -251,12 +251,13 @@ public class PersonRepoImpl implements PersonRepo {
         return (Person) ldapTemplate.lookup(dn, getContextMapper());
     }
 
-    public List findByName(String name) {
+    public List<Person> findByName(String name) {
         LdapQuery query = query()
                 .where("objectclass").is("person")
-                .and("cn").whitespaceWildcardsLike("name");
+                .and("cn").whitespaceWildcardsLike(name);
 
-        return ldapTemplate.search(query, getContextMapper());
+//        return ldapTemplate.search(query, getContextMapper());
+        return ldapTemplate.search(query, new PersonContextMapper());
     }
 
     @Override
