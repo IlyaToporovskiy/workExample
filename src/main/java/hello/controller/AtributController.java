@@ -48,11 +48,34 @@ public class AtributController {
         PersonRepoImpl personRepo = new PersonRepoImpl();
         personRepo.setLdapTemplate(ldapTemplate);
         List<Person> users = personRepo.findByName(userName);
-        System.out.println(users);
-
+        personRepo.getAllPersonNames();
+        System.out.println(users.get(0).getFullName());
+        System.out.println(personRepo.getAllPersonNames());
 
         return new ModelAndView("login");
     }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/showAllPerson")
+    public List<String> showAllPerson()
+    {
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String userName = userDetails.getUsername();
+        PersonRepoImpl personRepo = new PersonRepoImpl();
+        personRepo.setLdapTemplate(ldapTemplate);
+        List<Person> users = personRepo.findByName(userName);
+        List<String> allPersonNames= personRepo.getAllPersonNames();
+
+        return allPersonNames;
+    }
+
+
+
+
+
+
+
 
     @RequestMapping(method = RequestMethod.GET,value = "/show")
     public String show(Person person)
