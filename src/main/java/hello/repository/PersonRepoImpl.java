@@ -40,6 +40,10 @@ public class PersonRepoImpl implements PersonRepo {
                 });
     }
 
+    public Person findByUid(String uid) {
+        return ldapTemplate.findOne(query().where("uid").is(uid), Person.class);
+    }
+
     public void create(Person person) {
         DirContextAdapter context = new DirContextAdapter(buildDn(person));
         mapToContext(person, context);
@@ -79,13 +83,7 @@ public class PersonRepoImpl implements PersonRepo {
 //        return ldapTemplate.search(query, getContextMapper());
         return ldapTemplate.search(query, new PersonContextMapper());
     }
-/*
-    public List<Person> findByTel(String telephon){
-        LdapQuery query=query()
-                .where("objectclass").is("person")
-                .and("telephoneNumber").whitespaceWildcardsLike(telephon);
-        return ldapTemplate.search(query, new PersonContextMapper());
-    }*/
+
 
 
     @Override
