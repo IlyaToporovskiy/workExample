@@ -1,0 +1,156 @@
+version: 1
+
+dn: uid=andrey,ou=people,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: Andrey Ivanov
+sn: Andrey
+description:: 0YLQvtC20LUg0L7Qv9GL0YLQvdGL0Lkg0YLQtdGB0YLQuNGA0L7QstGJ0LjQug
+ ==
+telephoneNumber: 2345
+uid: andrey
+userPassword: {SHA}NWoZK3kTsExUV00Ywo1G5jlUKKs=
+
+dn: ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: top
+ou: subgroups
+
+dn: ou=people,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: top
+ou: people
+
+dn: uid=space cadet,ou=space cadets,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: Space Cadet
+sn: Cadet
+uid: space cadet
+userPassword: {SSHA}3b+MykJBmIuDSCPTqwVXrBCCDB4Ni6woEAw1iQ==
+
+dn: cn=developers,ou=groups,dc=springframework,dc=org
+objectclass: groupOfUniqueNames
+objectclass: top
+cn: developers
+uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
+uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
+ou: developer
+
+dn: uid=joe,ou=otherpeople,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: Joe Smeth
+sn: Smeth
+uid: joe
+userPassword: {SSHA}n225TLHIW1ltls2sEngkgPRA9cqLzX1/xgEUrg==
+
+dn: uid=bob,ou=people,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: Bob Hamilton
+sn: Hamilton
+description:: 0LvRjtCx0LjRgiDQv9C40YbRhtGD
+telephoneNumber: 2222
+uid: bob
+userPassword: {SSHA}Hsivg2O29RXtz0ILwT/TcJP1cnDrytgShxEYtQ==
+
+dn: ou=space cadets,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: top
+ou: space cadets
+
+dn: ou=groups,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: top
+ou: groups
+
+dn: cn=slash/guy,ou=people,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: slash/guy
+sn: Slash
+uid: slashguy
+userPassword: {SSHA}0Q8mcBK5x+ppKn5IX3W0twrinPgPnLaG69/M2Q==
+
+dn: uid=ben,ou=people,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: Ben Alex
+sn: Alex
+description:: 0L7Qv9GL0YLQvdGL0Lkg0YLQtdGB0YLQuNGA0L7QstGJ0LjQug==
+telephoneNumber: 1111
+uid: ben
+userPassword: {SHA}NWoZK3kTsExUV00Ywo1G5jlUKKs=
+
+dn: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: Mouse, Jerry
+sn: Mouse
+uid: jerry
+userPassword: {SSHA}0u9/R7ZANbKgzgbYqzAgf0AFvwrvkubxHe1NSQ==
+
+dn: cn=David Mish,ou=people,dc=springframework,dc=org
+objectClass: person
+objectClass: top
+cn: David Mish
+sn: Mish
+userPassword: {SSHA}L6WewWrfsN6Z66UJSu0sGbrR4FYDDwp5mQ0Hag==
+
+dn: cn=managers,ou=groups,dc=springframework,dc=org
+objectclass: groupOfUniqueNames
+objectclass: top
+cn: managers
+uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
+uniqueMember: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
+ou: manager
+
+dn: cn=quote\"guy,ou=\"quoted people\",dc=springframework,dc=org
+objectclass: inetOrgPerson
+objectclass: organizationalPerson
+objectclass: person
+objectclass: top
+cn: quote\"guy
+cn: quote"guy
+sn: Quote
+uid: quoteguy
+userPassword: {SSHA}J7Lk7dxaPSbazdKRWI9vlyLOdVJf51+n6BWt2w==
+
+dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: groupOfUniqueNames
+objectclass: top
+cn: submanagers
+uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
+ou: submanager
+
+dn: ou=otherpeople,dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: top
+ou: otherpeople
+
+dn: dc=springframework,dc=org
+objectclass: extensibleObject
+objectclass: domain
+objectclass: top
+dc: springframework
+
+dn: ou=\"quoted people\",dc=springframework,dc=org
+objectclass: organizationalUnit
+objectclass: top
+ou: "quoted people"
+
