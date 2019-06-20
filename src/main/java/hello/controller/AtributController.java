@@ -55,7 +55,7 @@ public class AtributController {
         return new ModelAndView("login");
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/showAllPerson")
+    @RequestMapping(method = RequestMethod.GET,value = "/showAllPersonZ")
     public List<String> showAllPerson()
     {
         UserDetails userDetails =

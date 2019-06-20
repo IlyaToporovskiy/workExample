@@ -17,7 +17,7 @@ public class RestController {
     @Autowired
     public LdapTemplate ldapTemplate;
 
-    @GetMapping(value = "/showAllPerson2")
+    @GetMapping(value = "/showAllPerson")
     public @ResponseBody List<String> showAllPerson(){
         UserDetails userDetails =
                 (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -30,4 +30,43 @@ public class RestController {
 
         return allPersonNames;
     }
+
+    @GetMapping(value = "/showCurrentUser")
+    public @ResponseBody String showCurrentUser(){
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String userName = userDetails.getUsername();
+        PersonRepoImpl personRepo = new PersonRepoImpl();
+        personRepo.setLdapTemplate(ldapTemplate);
+        List<Person> users = personRepo.findByName(userName);
+        personRepo.getAllPersonNames();
+        System.out.println(users.get(0).getPhone() );
+        System.out.println(personRepo.getAllPersonNames());
+
+        return users.get(0).getFullName();
+    }
+
+//    /*@GetMapping(value = "/showTelUser")
+//    public @ResponseBody String showTelUser(){
+//        UserDetails userDetails =
+//                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        String userName = userDetails.getUsername();
+//        PersonRepoImpl personRepo = new PersonRepoImpl();
+//        personRepo.setLdapTemplate(ldapTemplate);
+//
+//        List<Person> users = personRepo.findByName(userName);
+//        personRepo.getAllPersonNames();
+//        users.get(0).getPhone();
+//        List<Person> telUser=personRepo.findByTel("123");
+//        System.out.println(users.get(0).getPhone() );
+//        System.out.println(personRepo.getAllPersonNames());
+//
+//        return users.get(0).getFullName();
+//    }*/
+
+
+
+
 }

@@ -76,10 +76,17 @@ public class PersonRepoImpl implements PersonRepo {
         LdapQuery query = query()
                 .where("objectclass").is("person")
                 .and("cn").whitespaceWildcardsLike(name);
-
 //        return ldapTemplate.search(query, getContextMapper());
         return ldapTemplate.search(query, new PersonContextMapper());
     }
+/*
+    public List<Person> findByTel(String telephon){
+        LdapQuery query=query()
+                .where("objectclass").is("person")
+                .and("telephoneNumber").whitespaceWildcardsLike(telephon);
+        return ldapTemplate.search(query, new PersonContextMapper());
+    }*/
+
 
     @Override
     public <S extends Person> S save(S s) {

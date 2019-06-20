@@ -118,26 +118,3 @@ public class Person {
         return Objects.hash(dn, fullName, lastName, uid, description, country, company, phone);
     }
 }
-
-/*
-@Entry(objectClasses = { "person", "top" }, base="ou=people")
-public class Person {
-    @Id
-    private Name dn;
-
-    @Attribute(name="cn")
-    @DnAttribute(value="cn", index=1)
-    private String fullName;
-
-    // No @Attribute annotation means this will be bound to the LDAP attribute
-    // with the same value
-    private String description;
-
-    @DnAttribute(value="ou", index=0)
-    @Transient
-    private String company;
-
-    @Transient
-    private String someUnmappedField;
-    // ...more attributes below
-}*/
