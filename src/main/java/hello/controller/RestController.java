@@ -44,7 +44,7 @@ public class RestController {
         personRepo.setLdapTemplate(ldapTemplate);
         List<Person> users = personRepo.findByName(userName);
         personRepo.getAllPersonNames();
-        System.out.println(users.get(0).getPhone() );
+//        System.out.println(users.get(0).getPhone() );
         System.out.println(personRepo.getAllPersonNames());
 
         return users.get(0).getFullName();
@@ -79,6 +79,24 @@ public class RestController {
 
 //        List<Person> users = personRepo.findByName(userName);
        List a= (List) userDetails.getAuthorities();
+        System.out.println(a.get(0).toString());
+
+        return a;
+    }
+
+    @GetMapping(value = "/showPhone")
+    public @ResponseBody List showPhone(){
+        UserDetails userDetails =
+                (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = userDetails.getUsername();
+        PersonRepoImpl personRepo = new PersonRepoImpl();
+        personRepo.setLdapTemplate(ldapTemplate);
+
+        List<Person> users = personRepo.findByName(userName);
+        System.out.println(users);
+//        List<Person> all = personRepo.findAll();
+//        System.out.println(all);
+        List a= (List) userDetails.getAuthorities();
         System.out.println(a.get(0).toString());
 
         return a;

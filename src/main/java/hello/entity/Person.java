@@ -5,6 +5,8 @@ import org.springframework.ldap.odm.annotations.*;
 import javax.naming.Name;
 import java.util.Objects;
 
+import static java.util.Objects.nonNull;
+
 @Entry(base = "ou=people", objectClasses = {"inetOrgPerson", "organizationalPerson", "person", "top"})
 public class Person {
     @Id
@@ -32,7 +34,7 @@ public class Person {
     private String company;
 
     @Attribute(name = "telephoneNumber")
-    private String phone;
+    private Integer telephoneNumber;
 
     public Name getDn() {
         return dn;
@@ -90,12 +92,14 @@ public class Person {
         this.company = company;
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTelephoneNumber(String telephoneNumber) {
+        if (nonNull(telephoneNumber)){
+            this.telephoneNumber = Integer.parseInt(telephoneNumber);
+        }
     }
 
     @Override
@@ -110,11 +114,11 @@ public class Person {
                 Objects.equals(description, person.description) &&
                 Objects.equals(country, person.country) &&
                 Objects.equals(company, person.company) &&
-                Objects.equals(phone, person.phone);
+                Objects.equals(telephoneNumber, person.telephoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dn, fullName, lastName, uid, description, country, company, phone);
+        return Objects.hash(dn, fullName, lastName, uid, description, country, company, telephoneNumber);
     }
 }

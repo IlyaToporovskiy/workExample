@@ -9,9 +9,6 @@ import javax.naming.ldap.LdapName;
 import hello.entity.Person;
 import org.springframework.ldap.core.*;
 import org.springframework.ldap.core.support.AbstractContextMapper;
-import org.springframework.ldap.filter.AndFilter;
-import org.springframework.ldap.filter.EqualsFilter;
-import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
 import org.springframework.ldap.query.LdapQuery;
 import org.springframework.ldap.support.LdapNameBuilder;
 import org.springframework.ldap.support.LdapUtils;
@@ -81,9 +78,13 @@ public class PersonRepoImpl implements PersonRepo {
                 .where("objectclass").is("person")
                 .and("cn").whitespaceWildcardsLike(name);
 //        return ldapTemplate.search(query, getContextMapper());
-        return ldapTemplate.search(query, new PersonContextMapper());
+        return ldapTemplate.search(query, PERSON_CONTEXT_MAPPER);
     }
 
+//    public List<Person> findTel(){
+//        LdapQuery query =query().
+//                where
+//    }
 
 
     @Override
@@ -125,7 +126,7 @@ public class PersonRepoImpl implements PersonRepo {
             person.setFullName(context.getStringAttribute("cn"));
             person.setLastName(context.getStringAttribute("sn"));
             person.setDescription(context.getStringAttribute("description"));
-            person.setPhone(context.getStringAttribute("telephoneNumber"));
+            person.setTelephoneNumber(context.getStringAttribute("telephoneNumber"));
 
             return person;
         }
@@ -184,6 +185,7 @@ public class PersonRepoImpl implements PersonRepo {
             person.setFullName(context.getStringAttribute("cn"));
             person.setLastName(context.getStringAttribute("sn"));
             person.setDescription(context.getStringAttribute("description"));
+            person.setDescription(context.getStringAttribute("telephoneNumber"));
             return person;
         }
     }
